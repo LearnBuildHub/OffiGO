@@ -6,6 +6,18 @@ export default function Home() {
 
   const [rideType, setRideType] = useState<'car' | 'bike'>('car');
 
+  const [pickup, setPickup] = useState('');
+
+  const [drop, setDrop] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+
+    e.preventDefault();
+
+    alert(`Searching ${rideType.toUpperCase()} pool from "${pickup || 'Current Location'}" to "${drop || 'Office Hub'}"...`);
+
+  };
+
   return (
 <main className="min-h-screen bg-[#FDFBF7] text-gray-900 font-sans selection:bg-amber-400 selection:text-gray-950">
 
@@ -31,7 +43,7 @@ export default function Home() {
 </div>
 </nav>
 
-      {/* Hero Section - Swiggy/Zomato Web Style Split Layout */}
+      {/* Hero Section */}
 <section className="px-6 lg:px-16 pt-12 pb-20 max-w-7xl mx-auto">
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -72,7 +84,7 @@ export default function Home() {
 </div>
 </div>
 
-          {/* Right Interactive Widget (App/Platform Card) */}
+          {/* Right Interactive Widget */}
 <div className="lg:col-span-5">
 <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-2xl border border-gray-200 relative overflow-hidden">
 <div className="absolute top-0 right-0 w-40 h-40 bg-amber-400/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
@@ -91,6 +103,8 @@ export default function Home() {
 <div className="grid grid-cols-2 gap-3 mb-6">
 <button 
 
+                  type="button"
+
                   onClick={() => setRideType('car')}
 
                   className={`p-4 rounded-2xl border text-left transition ${rideType === 'car' ? 'bg-amber-50 border-amber-400 shadow-sm' : 'bg-gray-50 border-gray-200 hover:border-gray-300'}`}
@@ -101,31 +115,57 @@ export default function Home() {
 </button>
 <button 
 
+                  type="button"
+
                   onClick={() => setRideType('bike')}
 
                   className={`p-4 rounded-2xl border text-left transition ${rideType === 'bike' ? 'bg-emerald-50 border-emerald-400 shadow-sm' : 'bg-gray-50 border-gray-200 hover:border-gray-300'}`}
 >
-<div className="text-2xl mb-1">🏍️</div>
+<div className="text-2xl mb-1">🏍️️</div>
 <div className="font-bold text-sm text-gray-900">Bike Pool</div>
 <div className="text-xs text-gray-500">Fast & direct</div>
 </button>
 </div>
 
-              {/* Location Inputs */}
-<div className="space-y-3 mb-6">
+              {/* Form Inputs */}
+<form onSubmit={handleSearch} className="space-y-3 mb-6">
 <div className="flex items-center gap-3 p-3.5 rounded-xl bg-gray-50 border border-gray-200">
 <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-<input type="text" placeholder="Enter Tech Park / Pickup Location" className="bg-transparent text-sm w-full outline-none text-gray-800 placeholder-gray-400 font-medium" />
+<input 
+
+                    type="text" 
+
+                    value={pickup} 
+
+                    onChange={(e) => setPickup(e.target.value)}
+
+                    placeholder="Enter Tech Park / Pickup Location" 
+
+                    className="bg-transparent text-sm w-full outline-none text-gray-800 placeholder-gray-400 font-medium" 
+
+                  />
 </div>
 <div className="flex items-center gap-3 p-3.5 rounded-xl bg-gray-50 border border-gray-200">
 <span className="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
-<input type="text" placeholder="Enter Office Hub / Drop Location" className="bg-transparent text-sm w-full outline-none text-gray-800 placeholder-gray-400 font-medium" />
+<input 
+
+                    type="text" 
+
+                    value={drop} 
+
+                    onChange={(e) => setDrop(e.target.value)}
+
+                    placeholder="Enter Office Hub / Drop Location" 
+
+                    className="bg-transparent text-sm w-full outline-none text-gray-800 placeholder-gray-400 font-medium" 
+
+                  />
 </div>
-</div>
-<button className="w-full py-4 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-bold transition shadow-lg flex items-center justify-center gap-2">
+<button type="submit" className="w-full py-4 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-bold transition shadow-lg flex items-center justify-center gap-2 cursor-pointer mt-4">
 <span>Find Matching Rides</span>
 <span>→</span>
 </button>
+</form>
 </div>
 </div>
 </div>
