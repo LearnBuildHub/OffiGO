@@ -14,9 +14,13 @@ export default function Home() {
 
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
-  const [showInstallBanner, setShowInstallBanner] = useState(false);
+  const [showAndroidBanner, setShowAndroidBanner] = useState(false);
+
+  const [showIosModal, setShowIosModal] = useState(false);
 
   useEffect(() => {
+
+    // Android / Chrome PWA install prompt
 
     window.addEventListener('beforeinstallprompt', (e) => {
 
@@ -24,9 +28,31 @@ export default function Home() {
 
       setDeferredPrompt(e);
 
-      setShowInstallBanner(true);
+      setShowAndroidBanner(true);
 
     });
+
+    // Detect iOS (iPhone / iPad / iPod)
+
+    const isIosDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+
+    // Check if already running in standalone mode (already added to home screen)
+
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
+
+    if (isIosDevice && !isStandalone) {
+
+      // Show iOS instruction banner after 2 seconds
+
+      const timer = setTimeout(() => {
+
+        setShowIosModal(true);
+
+      }, 2000);
+
+      return () => clearTimeout(timer);
+
+    }
 
   }, []);
 
@@ -40,7 +66,7 @@ export default function Home() {
 
     if (outcome === 'accepted') {
 
-      setShowInstallBanner(false);
+      setShowAndroidBanner(false);
 
     }
 
@@ -59,9 +85,9 @@ export default function Home() {
   return (
 <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
 
-      {/* PWA Add to Home Screen Banner */}
+      {/* Android PWA Install Banner */}
 
-      {showInstallBanner && (
+      {showAndroidBanner && (
 <div className="bg-blue-600 text-white px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-md">
 <div className="flex items-center gap-2 text-sm font-semibold">
 <span>📱</span> Install OffiGo app for quick access on your home screen!
@@ -75,6 +101,35 @@ export default function Home() {
 
             Add to Home Screen
 </button>
+</div>
+
+      )}
+
+      {/* iOS Smart Guide Banner / Modal for iPhone users */}
+
+      {showIosModal && (
+<div className="fixed bottom-4 left-4 right-4 z-50 bg-slate-900 text-white p-5 rounded-3xl shadow-2xl border border-slate-700 animate-bounce-subtle max-w-md mx-auto">
+<div className="flex items-start justify-between gap-3">
+<div className="flex items-center gap-3">
+<span className="text-3xl">📱</span>
+<div>
+<h4 className="font-bold text-sm text-white">Install OffiGo on iPhone</h4>
+<p className="text-xs text-slate-300 mt-1 leading-relaxed">
+
+                  Tap the <span className="inline-block px-1.5 py-0.5 bg-blue-600 rounded text-[10px] font-bold">Share</span> button below and select <span className="font-semibold text-blue-400">"Add to Home Screen"</span>.
+</p>
+</div>
+</div>
+<button 
+
+              onClick={() => setShowIosModal(false)}
+
+              className="text-slate-400 hover:text-white text-lg font-bold px-2 cursor-pointer"
+>
+
+              ✕
+</button>
+</div>
 </div>
 
       )}
