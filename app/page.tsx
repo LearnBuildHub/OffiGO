@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
 
@@ -11,6 +11,42 @@ export default function Home() {
   const [to, setTo] = useState('');
 
   const [date, setDate] = useState('Today');
+
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  const [showInstallBanner, setShowInstallBanner] = useState(false);
+
+  useEffect(() => {
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+
+      e.preventDefault();
+
+      setDeferredPrompt(e);
+
+      setShowInstallBanner(true);
+
+    });
+
+  }, []);
+
+  const handleInstallClick = async () => {
+
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+
+      setShowInstallBanner(false);
+
+    }
+
+    setDeferredPrompt(null);
+
+  };
 
   const handleSearch = (e: React.FormEvent) => {
 
@@ -23,8 +59,28 @@ export default function Home() {
   return (
 <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
 
+      {/* PWA Add to Home Screen Banner */}
+
+      {showInstallBanner && (
+<div className="bg-blue-600 text-white px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-md">
+<div className="flex items-center gap-2 text-sm font-semibold">
+<span>📱</span> Install OffiGo app for quick access on your home screen!
+</div>
+<button 
+
+            onClick={handleInstallClick}
+
+            className="bg-white text-blue-600 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-blue-50 transition cursor-pointer"
+>
+
+            Add to Home Screen
+</button>
+</div>
+
+      )}
+
       {/* Navigation Bar */}
-<nav className="sticky top-0 z-50 backdrop-blur-md bg-white/90 border-b border-slate-100 px-6 lg:px-16 py-4 flex items-center justify-between">
+<nav className="sticky top-0 z-40 backdrop-blur-md bg-white/90 border-b border-slate-100 px-6 lg:px-16 py-4 flex items-center justify-between">
 <div className="flex items-center gap-2">
 <span className="text-2xl font-extrabold tracking-tight text-blue-600">
 
@@ -38,14 +94,14 @@ export default function Home() {
 <a href="#safety" className="hover:text-blue-600 transition">Corporate Trust</a>
 </div>
 <div className="flex items-center gap-3">
-<button className="px-4 py-2 rounded-full border border-blue-600 text-blue-600 text-sm font-bold hover:bg-blue-50 transition">
+<button className="px-4 py-2 rounded-full border border-blue-600 text-blue-600 text-sm font-bold hover:bg-blue-50 transition cursor-pointer">
 
             Offer a ride
 </button>
 </div>
 </nav>
 
-      {/* Hero Section - Exact Ola / BlaBlaCar Split Style */}
+      {/* Hero Section */}
 <section className="px-6 lg:px-16 pt-10 pb-16 max-w-7xl mx-auto">
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-10">
 
@@ -67,7 +123,7 @@ export default function Home() {
 </p>
 </div>
 
-          {/* Right Hero Image (Real Car Pooling Vibe like BlaBlaCar/Ola) */}
+          {/* Right Hero Image */}
 <div className="lg:col-span-5">
 <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-100 relative group h-[320px]">
 <img 
@@ -89,10 +145,8 @@ export default function Home() {
 </div>
 </div>
 
-        {/* Clean Horizontal Search Bar Widget (Ola / BlaBlaCar Style) */}
+        {/* Horizontal Search Bar Widget */}
 <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 lg:p-8 max-w-6xl mx-auto relative z-20">
-
-          {/* Car / Bike Selector Tabs */}
 <div className="flex gap-4 mb-6 border-b border-slate-100 pb-4">
 <button 
 
@@ -100,7 +154,7 @@ export default function Home() {
 
               onClick={() => setRideType('car')}
 
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition ${rideType === 'car' ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              className={`px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center gap-2 cursor-pointer ${rideType === 'car' ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
 >
 <span>🚗</span> Car Pool
 </button>
@@ -110,14 +164,12 @@ export default function Home() {
 
               onClick={() => setRideType('bike')}
 
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition ${rideType === 'bike' ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              className={`px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center gap-2 cursor-pointer ${rideType === 'bike' ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
 >
 <span>🏍️</span> Bike Pool
 </button>
 </div>
 <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
-
-            {/* From Input */}
 <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-500 transition">
 <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">From</label>
 <input 
@@ -134,8 +186,6 @@ export default function Home() {
 
               />
 </div>
-
-            {/* To Input */}
 <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-500 transition">
 <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">To</label>
 <input 
@@ -152,8 +202,6 @@ export default function Home() {
 
               />
 </div>
-
-            {/* Departure Date */}
 <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
 <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Departure</label>
 <select value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-transparent text-sm font-semibold text-slate-900 outline-none">
@@ -162,8 +210,6 @@ export default function Home() {
 <option>Scheduled</option>
 </select>
 </div>
-
-            {/* Search Submit Button */}
 <div>
 <button type="submit" className="w-full h-full min-h-[58px] rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-base transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer">
 <span>Search</span>
