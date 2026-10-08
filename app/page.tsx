@@ -201,7 +201,7 @@ export default function Home() {
      )}
      {/* Footer */}
 <footer className="border-t border-white/10 py-8 px-6 text-center text-xs text-gray-500 bg-[#04080E]">
-<p>Powered by LearnBuild Hub • Secure Corporate Transport Ecosystem</p>
+<p>Powered by OffiGo • Secure Corporate Transport Ecosystem</p>
 </footer>
 </main>
  );
