@@ -1,208 +1,726 @@
-'use client';
-import { useState, useEffect } from 'react';
+"use client";
+
+import { useState } from "react";
+
+type RideType = "car" | "bike";
+
 export default function Home() {
- const [rideType, setRideType] = useState<'car' | 'bike'>('car');
- const [from, setFrom] = useState('');
- const [to, setTo] = useState('');
- const [date, setDate] = useState('Today');
- const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
- const [showInstallGuide, setShowInstallGuide] = useState(false);
- const [isIos, setIsIos] = useState(false);
- useEffect(() => {
-   window.addEventListener('beforeinstallprompt', (e) => {
-     e.preventDefault();
-     setDeferredPrompt(e);
-   });
-   const isIosDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-   setIsIos(isIosDevice);
- }, []);
- const handleInstallClick = async () => {
-   if (deferredPrompt) {
-     deferredPrompt.prompt();
-     const { outcome } = await deferredPrompt.userChoice;
-     if (outcome === 'accepted') {
-       setDeferredPrompt(null);
-     }
-   } else {
-     // Fallback guide if browser prompt isn't ready
-     setShowInstallGuide(true);
-   }
- };
- const handleSearch = (e: React.FormEvent) => {
-   e.preventDefault();
-   alert(`Searching ${rideType.toUpperCase()} pool from "${from || 'Tech Park'}" to "${to || 'Office Hub'}" on ${date}`);
- };
- return (
-<main className="min-h-screen bg-[#060B13] text-white font-sans selection:bg-emerald-500 selection:text-gray-950 overflow-x-hidden">
-     {/* Background Glows */}
-<div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
-<div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-[140px] pointer-events-none"></div>
-     {/* Navigation Bar */}
-<nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#060B13]/80 border-b border-white/10 px-6 lg:px-16 py-4 flex items-center justify-between">
-<div className="flex items-center gap-2">
-<span className="text-2xl font-black tracking-tight text-white flex items-center gap-1">
-           Offi<span className="text-emerald-400">Go</span>
-<span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-</span>
+
+  const [rideType, setRideType] = useState<RideType>("car");
+
+  const [from, setFrom] = useState("");
+
+  const [to, setTo] = useState("");
+
+  const [date, setDate] = useState("");
+
+  const [time, setTime] = useState("");
+
+  const [showLogin, setShowLogin] = useState(false);
+
+  const [activeAction, setActiveAction] = useState<
+
+    "book" | "share" | null
+>(null);
+
+  const handleBookRide = () => {
+
+    setActiveAction("book");
+
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: "smooth",
+
+    });
+
+  };
+
+  const handleShareRide = () => {
+
+    setActiveAction("share");
+
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: "smooth",
+
+    });
+
+  };
+
+  const handleSearch = () => {
+
+    if (!from || !to) {
+
+      alert("Please enter your pickup and destination.");
+
+      return;
+
+    }
+
+    alert(
+
+      `Searching rides from ${from} to ${to}${date ? ` on ${date}` : ""}${
+
+        time ? ` at ${time}` : ""
+
+      }...`
+
+    );
+
+  };
+
+  return (
+<main className="offigo-page">
+
+      {/* NAVBAR */}
+<header className="navbar">
+<div className="nav-container">
+<a href="#" className="brand">
+<div className="brand-mark">
+<span>↗</span>
 </div>
-<div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-<a href="#search" className="hover:text-emerald-400 transition">Explore Pools</a>
-<a href="#benefits" className="hover:text-emerald-400 transition">Why OffiGo</a>
-<a href="#safety" className="hover:text-emerald-400 transition">Corporate Trust</a>
+<div className="brand-text">
+<span className="brand-offi">Offi</span>
+<span className="brand-go">Go</span>
 </div>
-<div className="flex items-center gap-3">
-<button
-           onClick={handleInstallClick}
-           className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold text-white transition flex items-center gap-1.5 cursor-pointer"
->
-<span>📱</span> Install App
-</button>
-<button className="px-5 py-2.5 rounded-xl bg-emerald-500 text-gray-950 font-bold text-sm shadow-lg shadow-emerald-500/20 hover:bg-emerald-400 transition cursor-pointer">
-           Offer a Ride
-</button>
-</div>
+</a>
+<nav className="desktop-nav">
+<a href="#how-it-works">How It Works</a>
+<a href="#safety">Safety</a>
+<a href="#corporate">Corporate</a>
+<a href="#faq">FAQ</a>
 </nav>
-     {/* Hero Section */}
-<section className="px-6 lg:px-16 pt-12 pb-20 max-w-7xl mx-auto relative z-10">
-<div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-         {/* Left Content */}
-<div className="lg:col-span-7 space-y-6">
-<div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-             Verified Corporate & Tech Park Commuters
+<button
+
+            className="login-btn"
+
+            onClick={() => setShowLogin(true)}
+>
+
+            Log in
+</button>
 </div>
-<h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1]">
-             Intra-City Office Commute, <br />
-<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
-               Reinvented for Professionals.
-</span>
+</header>
+
+      {/* HERO */}
+<section className="hero">
+<div className="hero-background-glow glow-one" />
+<div className="hero-background-glow glow-two" />
+<div className="hero-container">
+<div className="hero-content">
+<div className="small-badge">
+<span className="status-dot" />
+
+              Built for daily corporate commute
+</div>
+<h1>
+
+              Same Office.
+<br />
+
+              Same Route.
+<br />
+<span>Better Together.</span>
 </h1>
-<p className="text-gray-400 text-base sm:text-lg max-w-xl leading-relaxed">
-             Connect securely with colleagues from your office building. Share car and bike pools with zero platform commission and complete shift synchronization.
+<p className="hero-description">
+
+              Find verified professionals travelling your route to work.
+
+              Share your commute, reduce travel costs and make your daily
+
+              journey easier.
 </p>
-</div>
-         {/* Right Imagery - Custom Corporate Commute Vibe */}
-<div className="lg:col-span-5 grid grid-cols-2 gap-4">
-<div className="space-y-4">
-<div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-48 group">
-<img
-                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600"
-                 alt="Office Team"
-                 className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-               />
-</div>
-<div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-36 group">
-<img
-                 src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600"
-                 alt="Bike Commute"
-                 className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-               />
-</div>
-</div>
-<div className="space-y-4 pt-8">
-<div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-36 group">
-<img
-                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600"
-                 alt="Professional"
-                 className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-               />
-</div>
-<div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-48 group">
-<img
-                 src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=600"
-                 alt="Car Drive"
-                 className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-               />
-</div>
-</div>
-</div>
-</div>
-       {/* Glassmorphism Horizontal Search Widget */}
-<div id="search" className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-6 lg:p-8 rounded-3xl shadow-2xl max-w-5xl mx-auto relative z-20">
-<div className="flex gap-4 mb-6 border-b border-white/10 pb-4">
+<div className="hero-actions">
 <button
-             type="button"
-             onClick={() => setRideType('car')}
-             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center gap-2 cursor-pointer ${rideType === 'car' ? 'bg-emerald-500 text-gray-950 shadow-lg shadow-emerald-500/20' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+
+                className="primary-btn"
+
+                onClick={handleBookRide}
 >
-<span>🚗</span> Car Pool
+<span>🚗</span>
+
+                Book a Ride
 </button>
 <button
-             type="button"
-             onClick={() => setRideType('bike')}
-             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition flex items-center gap-2 cursor-pointer ${rideType === 'bike' ? 'bg-emerald-500 text-gray-950 shadow-lg shadow-emerald-500/20' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}
+
+                className="secondary-btn"
+
+                onClick={handleShareRide}
 >
-<span>🏍️</span> Bike Pool
+<span>🚘</span>
+
+                Share a Ride
 </button>
 </div>
-<form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
-<div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/50 transition">
-<label className="block text-[11px] font-bold text-emerald-400 uppercase tracking-wider mb-1">From</label>
-<input
-               type="text"
-               value={from}
-               onChange={(e) => setFrom(e.target.value)}
-               placeholder="Tech Park / Locality"
-               className="w-full bg-transparent text-sm font-semibold text-white outline-none placeholder-gray-500"
-             />
-</div>
-<div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/50 transition">
-<label className="block text-[11px] font-bold text-cyan-400 uppercase tracking-wider mb-1">To</label>
-<input
-               type="text"
-               value={to}
-               onChange={(e) => setTo(e.target.value)}
-               placeholder="Office Destination"
-               className="w-full bg-transparent text-sm font-semibold text-white outline-none placeholder-gray-500"
-             />
-</div>
-<div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
-<label className="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Shift / Date</label>
-<select value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-transparent text-sm font-semibold text-white outline-none cursor-pointer">
-<option className="bg-slate-900 text-white">Today</option>
-<option className="bg-slate-900 text-white">Tomorrow</option>
-<option className="bg-slate-900 text-white">Regular Weekdays</option>
-</select>
+<div className="trust-row">
+<div>
+<strong>✓</strong>
+
+                Corporate Verified
 </div>
 <div>
-<button type="submit" className="w-full h-full min-h-[58px] rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 text-gray-950 font-extrabold text-base transition shadow-xl hover:opacity-90 flex items-center justify-center gap-2 cursor-pointer">
-<span>Search Rides</span>
+<strong>✓</strong>
+
+                Car & Bike
+</div>
+<div>
+<strong>✓</strong>
+
+                Daily Commute
+</div>
+</div>
+</div>
+
+          {/* HERO VISUAL */}
+<div className="hero-visual">
+<div className="city-circle">
+<div className="city-building building-one" />
+<div className="city-building building-two" />
+<div className="city-building building-three" />
+<div className="city-building building-four" />
+<div className="city-building building-five" />
+</div>
+<div className="route-ring" />
+<div className="road">
+<div className="road-line line-one" />
+<div className="road-line line-two" />
+<div className="road-line line-three" />
+</div>
+<div className="hero-car">🚗</div>
+<div className="hero-bike">🏍️</div>
+<div className="route-pin pin-start">
+<span>📍</span>
+
+              Wakad
+</div>
+<div className="route-pin pin-end">
+<span>🏢</span>
+
+              Hinjewadi
+</div>
+</div>
+</div>
+</section>
+
+      {/* QUICK BOOKING PANEL */}
+<section className="booking-wrapper">
+<div className="booking-card">
+<div className="booking-heading">
+<div>
+<span className="section-label">
+
+                {activeAction === "share"
+
+                  ? "OFFER A RIDE"
+
+                  : "FIND YOUR COMMUTE"}
+</span>
+<h2>
+
+                {activeAction === "share"
+
+                  ? "Share your daily route"
+
+                  : "Where are you going?"}
+</h2>
+</div>
+<div className="switch-buttons">
+<button
+
+                className={
+
+                  activeAction !== "share"
+
+                    ? "switch active"
+
+                    : "switch"
+
+                }
+
+                onClick={handleBookRide}
+>
+
+                🚗 Book
+</button>
+<button
+
+                className={
+
+                  activeAction === "share"
+
+                    ? "switch active orange"
+
+                    : "switch"
+
+                }
+
+                onClick={handleShareRide}
+>
+
+                🚘 Share
+</button>
+</div>
+</div>
+<div className="form-grid">
+<div className="input-box">
+<label>From</label>
+<div className="input-with-icon">
+<span>📍</span>
+<input
+
+                  value={from}
+
+                  onChange={(e) => setFrom(e.target.value)}
+
+                  placeholder="Your locality"
+
+                />
+</div>
+</div>
+<div className="input-box">
+<label>To</label>
+<div className="input-with-icon">
+<span>🏢</span>
+<input
+
+                  value={to}
+
+                  onChange={(e) => setTo(e.target.value)}
+
+                  placeholder="Office / Tech Park"
+
+                />
+</div>
+</div>
+<div className="input-box">
+<label>Date</label>
+<div className="input-with-icon">
+<span>📅</span>
+<input
+
+                  type="date"
+
+                  value={date}
+
+                  onChange={(e) => setDate(e.target.value)}
+
+                />
+</div>
+</div>
+<div className="input-box">
+<label>Time</label>
+<div className="input-with-icon">
+<span>🕘</span>
+<input
+
+                  type="time"
+
+                  value={time}
+
+                  onChange={(e) => setTime(e.target.value)}
+
+                />
+</div>
+</div>
+</div>
+<div className="vehicle-section">
+<span>Vehicle</span>
+<div className="vehicle-options">
+<button
+
+                className={
+
+                  rideType === "car"
+
+                    ? "vehicle-option selected"
+
+                    : "vehicle-option"
+
+                }
+
+                onClick={() => setRideType("car")}
+>
+<span>🚗</span>
+
+                Car
+</button>
+<button
+
+                className={
+
+                  rideType === "bike"
+
+                    ? "vehicle-option selected"
+
+                    : "vehicle-option"
+
+                }
+
+                onClick={() => setRideType("bike")}
+>
+<span>🏍️</span>
+
+                Bike
+</button>
+</div>
+</div>
+<button
+
+            className="search-btn"
+
+            onClick={handleSearch}
+>
+
+            {activeAction === "share"
+
+              ? "Continue to Share Your Ride"
+
+              : "Find Available Rides"}
 <span>→</span>
 </button>
 </div>
-</form>
+</section>
+
+      {/* HOW IT WORKS */}
+<section
+
+        className="section"
+
+        id="how-it-works"
+>
+<div className="section-header">
+<span className="section-label">HOW OFFIGO WORKS</span>
+<h2>
+
+            Your daily commute,
+<br />
+<span>simplified.</span>
+</h2>
+<p>
+
+            No random rides. No complicated process. Just people
+
+            travelling the same route to work.
+</p>
+</div>
+<div className="steps-grid">
+<div className="step-card">
+<div className="step-number">01</div>
+<div className="step-icon">📍</div>
+<h3>Choose your route</h3>
+<p>
+
+              Enter your locality, office and preferred commute time.
+</p>
+</div>
+<div className="step-card highlighted">
+<div className="step-number">02</div>
+<div className="step-icon">🎯</div>
+<h3>Find a matching commute</h3>
+<p>
+
+              Discover people travelling your route around the same
+
+              time.
+</p>
+</div>
+<div className="step-card">
+<div className="step-number">03</div>
+<div className="step-icon">🤝</div>
+<h3>Connect & commute</h3>
+<p>
+
+              Book or share a ride with verified corporate
+
+              professionals.
+</p>
+</div>
 </div>
 </section>
-     {/* Install Instruction Modal / Drawer */}
-     {showInstallGuide && (
-<div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
-<div className="bg-[#0B132B] border border-white/15 rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl relative">
-<div className="flex justify-between items-center">
-<h3 className="text-lg font-bold text-white flex items-center gap-2"><span>📱</span> Install OffiGo App</h3>
-<button onClick={() => setShowInstallGuide(false)} className="text-gray-400 hover:text-white font-bold cursor-pointer">✕</button>
-</div>
-           {isIos ? (
-<p className="text-sm text-gray-300 leading-relaxed">
-               To install on iPhone: Tap the <span className="text-emerald-400 font-bold">Share</span> button in Safari browser, then select <span className="text-emerald-400 font-bold">"Add to Home Screen"</span>.
-</p>
-           ) : (
-<p className="text-sm text-gray-300 leading-relaxed">
-               To install on Android / Desktop: Click your browser's menu (3 dots) and select <span className="text-emerald-400 font-bold">"Install App"</span> or <span className="text-emerald-400 font-bold">"Add to Home screen"</span>.
-</p>
-           )}
-<button
-             onClick={() => setShowInstallGuide(false)}
-             className="w-full py-3 rounded-xl bg-emerald-500 text-gray-950 font-bold text-sm cursor-pointer"
+
+      {/* FEATURES */}
+<section className="feature-section">
+<div className="feature-grid">
+<div
+
+            className="feature-card"
+
+            id="corporate"
 >
-             Got it
+<div className="feature-icon">🛡️</div>
+<h3>Corporate Verified</h3>
+<p>
+
+              Connect with professionals whose workplace identity
+
+              has been verified.
+</p>
+<span className="feature-link">
+
+              Built for professionals →
+</span>
+</div>
+<div className="feature-card">
+<div className="feature-icon">🚗🏍️</div>
+<h3>Car & Bike Commute</h3>
+<p>
+
+              Choose the commute option that fits your daily route
+
+              and schedule.
+</p>
+<span className="feature-link">
+
+              Find your route →
+</span>
+</div>
+<div
+
+            className="feature-card"
+
+            id="safety"
+>
+<div className="feature-icon">✓</div>
+<h3>Safe & Reliable</h3>
+<p>
+
+              Ratings, verification and reliability signals help
+
+              create a trusted commute network.
+</p>
+<span className="feature-link">
+
+              Learn about safety →
+</span>
+</div>
+</div>
+</section>
+
+      {/* OFFICE COMMUNITY */}
+<section className="community-section">
+<div className="community-content">
+<span className="section-label">YOUR OFFICE COMMUNITY</span>
+<h2>
+
+            Your office.
+<br />
+<span>Your commute community.</span>
+</h2>
+<p>
+
+            Find professionals travelling to the same office or
+
+            technology park from nearby localities.
+</p>
+<button
+
+            className="outline-btn"
+
+            onClick={handleBookRide}
+>
+
+            Explore Commutes →
 </button>
 </div>
+<div className="community-card">
+<div className="community-top">
+<div className="company-icon">🏢</div>
+<div>
+<strong>Capgemini</strong>
+<span>Hinjewadi</span>
 </div>
-     )}
-     {/* Footer */}
-<footer className="border-t border-white/10 py-8 px-6 text-center text-xs text-gray-500 bg-[#04080E]">
-<p>Powered by OffiGo • Secure Corporate Transport Ecosystem</p>
+<div className="verified-badge">
+
+              ✓ Verified
+</div>
+</div>
+<div className="community-stats">
+<div>
+<strong>184</strong>
+<span>Members</span>
+</div>
+<div>
+<strong>37</strong>
+<span>Ride Providers</span>
+</div>
+<div>
+<strong>147</strong>
+<span>Commuters</span>
+</div>
+</div>
+<div className="popular-route">
+<span>Popular Route</span>
+<div>
+
+              📍 Wakad
+<span>→</span>
+
+              🏢 Hinjewadi
+</div>
+</div>
+</div>
+</section>
+
+      {/* CTA */}
+<section className="cta-section">
+<div className="cta-glow" />
+<span className="section-label">
+
+          COMING SOON
+</span>
+<h2>
+
+          Your daily commute
+<br />
+
+          is about to get <span>better.</span>
+</h2>
+<p>
+
+          OffiGo is building a trusted corporate commute network,
+
+          starting with Pune.
+</p>
+<div className="cta-actions">
+<button
+
+            className="primary-btn"
+
+            onClick={handleBookRide}
+>
+
+            🚗 Book a Ride
+</button>
+<button
+
+            className="secondary-btn"
+
+            onClick={handleShareRide}
+>
+
+            🚘 Share a Ride
+</button>
+</div>
+<div className="cta-note">
+
+          Same Office. Same Route. Better Together.
+</div>
+</section>
+
+      {/* FOOTER */}
+<footer className="footer">
+<div className="footer-brand">
+<div className="brand">
+<div className="brand-mark">
+<span>↗</span>
+</div>
+<div className="brand-text">
+<span className="brand-offi">Offi</span>
+<span className="brand-go">Go</span>
+</div>
+</div>
+<p>
+
+            Your Daily Corporate Commute Network
+</p>
+</div>
+<div className="footer-links">
+<a href="#how-it-works">How It Works</a>
+<a href="#safety">Safety</a>
+<a href="#corporate">Corporate</a>
+<a href="#faq">FAQ</a>
+</div>
+<div className="footer-bottom">
+<span>
+
+            © {new Date().getFullYear()} OffiGo. All rights reserved.
+</span>
+<span>
+
+            Powered by LearnBuild Hub
+</span>
+</div>
 </footer>
+
+      {/* LOGIN MODAL */}
+
+      {showLogin && (
+<div
+
+          className="modal-overlay"
+
+          onClick={() => setShowLogin(false)}
+>
+<div
+
+            className="login-modal"
+
+            onClick={(e) => e.stopPropagation()}
+>
+<button
+
+              className="close-btn"
+
+              onClick={() => setShowLogin(false)}
+>
+
+              ×
+</button>
+<div className="modal-logo">
+<div className="brand-mark large">
+<span>↗</span>
+</div>
+</div>
+<span className="section-label">
+
+              WELCOME BACK
+</span>
+<h2>Continue with OffiGo</h2>
+<p>
+
+              Login to manage your rides and daily commute.
+</p>
+<label>Mobile Number</label>
+<div className="phone-input">
+<span>+91</span>
+<input
+
+                type="tel"
+
+                placeholder="98765 43210"
+
+                maxLength={10}
+
+              />
+</div>
+<button className="search-btn">
+
+              Send OTP →
+</button>
+<div className="login-divider">
+<span>or</span>
+</div>
+<button className="email-login">
+
+              Continue with Email
+</button>
+<small>
+
+              By continuing, you agree to OffiGo&apos;s Terms and
+
+              Privacy Policy.
+</small>
+</div>
+</div>
+
+      )}
 </main>
- );
+
+  );
+
 }
+ 
