@@ -2,50 +2,117 @@
 
 import React from 'react';
 
-export default function OffiGoDesktopHome() {
+export default function OffiGoExactPage() {
 
   return (
-<div className="min-h-screen bg-[#040D1A] text-white font-sans relative overflow-x-hidden">
+<div style={{
 
-      {/* Background Gradient & Glow Effects */}
-<div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cyan-600/10 blur-[150px] rounded-full pointer-events-none" />
+      backgroundColor: '#030B17',
+
+      color: '#ffffff',
+
+      minHeight: '100vh',
+
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+
+      overflowX: 'hidden',
+
+      margin: 0,
+
+      padding: 0
+
+    }}>
 
       {/* TOP NAVBAR */}
-<header className="relative z-50 max-w-7xl mx-auto px-6 h-24 flex items-center justify-between border-b border-cyan-900/30">
+<header style={{
 
-        {/* Logo & Brand */}
-<div className="flex items-center gap-3">
-<div className="relative w-11 h-11 flex items-center justify-center">
-<div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-xl rotate-45" />
-<svg className="relative z-10 w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-</svg>
+        maxWidth: '1200px',
+
+        margin: '0 auto',
+
+        padding: '20px 24px',
+
+        display: 'flex',
+
+        alignItems: 'center',
+
+        justifyContent: 'space-between',
+
+        borderBottom: '1px solid rgba(0, 229, 255, 0.2)'
+
+      }}>
+
+        {/* Logo */}
+<div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+<div style={{
+
+            width: '40px',
+
+            height: '40px',
+
+            background: 'linear-gradient(135deg, #00e5ff, #2979ff)',
+
+            borderRadius: '10px',
+
+            display: 'flex',
+
+            alignItems: 'center',
+
+            justifyContent: 'center',
+
+            fontWeight: 'bold',
+
+            color: '#030B17',
+
+            fontSize: '20px'
+
+          }}>
+
+            📍
 </div>
 <div>
-<span className="text-2xl font-black tracking-tight text-white flex items-center gap-1">
+<div style={{ fontSize: '22px', fontWeight: '900', letterSpacing: '-0.5px' }}>
 
-              Offi<span className="text-cyan-400">Go</span>
-</span>
-<p className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold -mt-1">
+              Offi<span style={{ color: '#00e5ff' }}>Go</span>
+</div>
+<div style={{ fontSize: '8px', textTransform: 'uppercase', color: '#94a3b8', letterSpacing: '0.5px' }}>
 
               Your Daily Corporate Commute Network
-</p>
+</div>
 </div>
 </div>
 
-        {/* Navigation Links */}
-<nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-<a href="#" className="text-cyan-400 hover:text-cyan-300 transition-colors">Home</a>
-<a href="#" className="hover:text-cyan-300 transition-colors">How It Works</a>
-<a href="#" className="hover:text-cyan-300 transition-colors">Safety</a>
-<a href="#" className="hover:text-cyan-300 transition-colors">Corporate</a>
-<a href="#" className="hover:text-cyan-300 transition-colors">FAQ</a>
-<a href="#" className="hover:text-cyan-300 transition-colors">Contact</a>
+        {/* Nav Links */}
+<nav style={{ display: 'flex', gap: '28px', fontSize: '14px', color: '#cbd5e1' }}>
+<a href="#" style={{ color: '#00e5ff', textDecoration: 'none', fontWeight: '600' }}>Home</a>
+<a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>How It Works</a>
+<a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Safety</a>
+<a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Corporate</a>
+<a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>FAQ</a>
+<a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Contact</a>
 </nav>
 
         {/* Login Button */}
 <div>
-<a href="/login" className="px-7 py-2.5 rounded-full border border-cyan-500/60 hover:border-cyan-400 text-cyan-200 hover:text-white hover:bg-cyan-500/10 transition-all text-sm font-semibold tracking-wide">
+<a href="/login" style={{
+
+            padding: '8px 24px',
+
+            borderRadius: '50px',
+
+            border: '1px solid rgba(0, 229, 255, 0.5)',
+
+            color: '#00e5ff',
+
+            textDecoration: 'none',
+
+            fontSize: '14px',
+
+            fontWeight: '600',
+
+            backgroundColor: 'transparent'
+
+          }}>
 
             Login
 </a>
@@ -53,45 +120,91 @@ export default function OffiGoDesktopHome() {
 </header>
 
       {/* HERO SECTION */}
-<main className="relative z-10 max-w-7xl mx-auto px-6 pt-12 pb-16">
-<div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<main style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 24px' }}>
+<div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}>
 
-          {/* Left Column: Headings & CTA */}
-<div className="lg:col-span-5 space-y-6">
-<h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1] text-white">
+          {/* Left Text */}
+<div style={{ flex: '1', minWidth: '300px' }}>
+<h1 style={{ fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: '900', lineHeight: '1.1', margin: '0 0 20px 0' }}>
 
               Same Office. <br />
 
               Same Route. <br />
-<span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent italic font-extrabold">
+<span style={{ 
+
+                background: 'linear-gradient(90deg, #00e5ff, #64ffda, #2979ff)', 
+
+                WebkitBackgroundClip: 'text', 
+
+                WebkitTextFillColor: 'transparent',
+
+                fontStyle: 'italic'
+
+              }}>
 
                 Better Together.
 </span>
 </h1>
-<p className="text-slate-300 text-base leading-relaxed max-w-md">
+<p style={{ fontSize: '16px', color: '#94a3b8', lineHeight: '1.6', maxWidth: '450px', marginBottom: '30px' }}>
 
               Join verified professionals, share or book rides, and make your daily commute easier, safer and more affordable.
 </p>
 
-            {/* Action Buttons */}
-<div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
-<button className="w-full sm:w-auto py-3.5 px-8 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-sm shadow-xl shadow-cyan-500/25 transition-all flex items-center justify-center gap-2">
+            {/* CTA Buttons */}
+<div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+<button style={{
 
-                Book a Ride
+                padding: '14px 28px',
+
+                borderRadius: '50px',
+
+                backgroundColor: '#00e5ff',
+
+                color: '#030B17',
+
+                fontWeight: '800',
+
+                fontSize: '15px',
+
+                border: 'none',
+
+                cursor: 'pointer',
+
+                boxShadow: '0 10px 25px rgba(0, 229, 255, 0.3)'
+
+              }}>
+
+                🚗 Book a Ride
 </button>
-<button className="w-full sm:w-auto py-3.5 px-8 rounded-full bg-[#081a33]/90 border border-cyan-500/50 text-cyan-200 hover:bg-cyan-950/40 font-bold text-sm transition-all flex items-center justify-center gap-2">
+<button style={{
 
-                Share a Ride
+                padding: '14px 28px',
+
+                borderRadius: '50px',
+
+                backgroundColor: '#08162c',
+
+                color: '#00e5ff',
+
+                fontWeight: '700',
+
+                fontSize: '15px',
+
+                border: '1px solid rgba(0, 229, 255, 0.4)',
+
+                cursor: 'pointer'
+
+              }}>
+
+                👥 Share a Ride
 </button>
 </div>
 </div>
 
-          {/* Right Column: Hero Graphic Banner with Right-side Tagline */}
-<div className="lg:col-span-7 relative">
-
-            {/* Floating Right Tagline */}
-<div className="absolute -top-10 right-6 z-20 text-right hidden sm:block">
-<p className="text-cyan-300 italic font-serif text-xl sm:text-2xl drop-shadow-md">
+          {/* Right Banner Illustration */}
+<div style={{ flex: '1.2', minWidth: '320px', position: 'relative' }}>
+<div style={{ textAlign: 'right', marginBottom: '15px' }}>
+<p style={{ color: '#00e5ff', fontStyle: 'italic', fontSize: '20px', fontFamily: 'serif', margin: 0, textShadow: '0 2px 10px rgba(0,229,255,0.3)' }}>
 
                 Same People.<br />
 
@@ -100,93 +213,100 @@ export default function OffiGoDesktopHome() {
                 Same Destination.
 </p>
 </div>
+<div style={{
 
-            {/* Banner Image Container */}
-<div className="relative rounded-3xl overflow-hidden border border-cyan-500/30 bg-[#061428] shadow-2xl p-2">
+              borderRadius: '24px',
+
+              border: '1px solid rgba(0, 229, 255, 0.3)',
+
+              backgroundColor: '#061326',
+
+              padding: '10px',
+
+              boxShadow: '0 20px 40px rgba(0,0,0,0.6)'
+
+            }}>
 <img 
 
-                src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=1200&q=80" 
+                src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=1000&q=80" 
 
-                alt="OffiGo Corporate Commute Illustration"
+                alt="OffiGo Commute"
 
-                className="w-full h-[360px] sm:h-[420px] object-cover rounded-2xl"
+                style={{ width: '100%', height: '380px', objectFit: 'cover', borderRadius: '16px', display: 'block' }}
 
               />
 </div>
 </div>
 </div>
 
-        {/* BOTTOM FEATURE CARDS (How OffiGo Works + Trust Badges) */}
-<div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* BOTTOM SECTION (How it works & Features) */}
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginTop: '50px' }}>
 
-          {/* Left Box: How OffiGo Works */}
-<div className="lg:col-span-7 bg-[#071528]/90 border border-cyan-900/40 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
-<h3 className="text-xl font-bold text-white mb-6">How OffiGo Works</h3>
-<div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {/* How OffiGo Works Box */}
+<div style={{
 
-              {/* Step 1 */}
-<div className="space-y-2">
-<div className="w-10 h-10 rounded-full bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold">
+            backgroundColor: '#061326',
 
-                  1
+            border: '1px solid rgba(0, 229, 255, 0.2)',
+
+            borderRadius: '24px',
+
+            padding: '30px',
+
+            boxShadow: '0 10px 30px rgba(0,0,0,0.4)'
+
+          }}>
+<h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: '0. 0 24px 0', color: '#ffffff' }}>How OffiGo Works</h3>
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+<div>
+<div style={{ width: '32px', height: '32px', borderRadius: '50%O', background: '#020e1d', border: '1px solid #00e5ff', color: '#00e5ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', marginBottom: '10px', fontSize: '14px' }}>1</div>
+<div style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '4px' }}>Choose route</div>
+<div style={{ fontSize: '11px', color: '#94a3b8' }}>Enter office location and time.</div>
 </div>
-<h4 className="text-sm font-bold text-white">Choose your route</h4>
-<p className="text-xs text-slate-400 leading-relaxed">
-
-                  Enter your office location and preferred time.
-</p>
+<div>
+<div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#020e1d', border: '1px solid #00e5ff', color: '#00e5ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', marginBottom: '10px', fontSize: '14px' }}>2</div>
+<div style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '4px' }}>Find match</div>
+<div style={{ fontSize: '11px', color: '#94a3b8' }}>View verified professional rides.</div>
 </div>
-
-              {/* Step 2 */}
-<div className="space-y-2">
-<div className="w-10 h-10 rounded-full bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold">
-
-                  2
-</div>
-<h4 className="text-sm font-bold text-white">Find a matching commute</h4>
-<p className="text-xs text-slate-400 leading-relaxed">
-
-                  View available rides from verified professionals.
-</p>
-</div>
-
-              {/* Step 3 */}
-<div className="space-y-2">
-<div className="w-10 h-10 rounded-full bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold">
-
-                  3
-</div>
-<h4 className="text-sm font-bold text-white">Connect & ride</h4>
-<p className="text-xs text-slate-400 leading-relaxed">
-
-                  Book or share a ride and travel together.
-</p>
+<div>
+<div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#020e1d', border: '1px solid #00e5ff', color: '#00e5ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', marginBottom: '10px', fontSize: '14px' }}>3</div>
+<div style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '4px' }}>Connect</div>
+<div style={{ fontSize: '11px', color: '#94a3b8' }}>Book or share and travel together.</div>
 </div>
 </div>
 </div>
 
-          {/* Right Box: Trust Badges */}
-<div className="lg:col-span-5 bg-[#071528]/90 border border-cyan-900/40 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl flex items-center justify-around">
-<div className="text-center space-y-2">
-<div className="w-12 h-12 mx-auto rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+          {/* Trust Badges Box */}
+<div style={{
 
-                🛡️
-</div>
-<p className="text-xs font-bold text-white">Corporate Verified</p>
-</div>
-<div className="text-center space-y-2">
-<div className="w-12 h-12 mx-auto rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+            backgroundColor: '#061326',
 
-                🚗
-</div>
-<p className="text-xs font-bold text-white">Car & Bike Options</p>
-</div>
-<div className="text-center space-y-2">
-<div className="w-12 h-12 mx-auto rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+            border: '1px solid rgba(0, 229, 255, 0.2)',
 
-                🔒
+            borderRadius: '24px',
+
+            padding: '30px',
+
+            display: 'flex',
+
+            alignItems: 'center',
+
+            justifyContent: 'space-around',
+
+            boxShadow: '0 10px 30px rgba(0,0,0,0.4)'
+
+          }}>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '28px', marginBottom: '8px' }}>🛡️</div>
+<div style={{ fontSize: '12px', fontWeight: 'bold', color: '#fff' }}>Corporate Verified</div>
 </div>
-<p className="text-xs font-bold text-white">Safe & Reliable</p>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '28px', marginBottom: '8px' }}>🚗</div>
+<div style={{ fontSize: '12px', fontWeight: 'bold', color: '#fff' }}>Car & Bike Options</div>
+</div>
+<div style={{ textAlign: 'center' }}>
+<div style={{ fontSize: '28px', marginBottom: '8px' }}>🔒</div>
+<div style={{ fontSize: '12px', fontWeight: 'bold', color: '#fff' }}>Safe & Reliable</div>
 </div>
 </div>
 </div>
