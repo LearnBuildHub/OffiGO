@@ -1,0 +1,2 @@
+'use client';import Link from'next/link';import BottomNav from'@/components/BottomNav';
+export default function Confirm(){return <main className="mobile"><div className="success"><div className="check">✓</div><h1>Ride Request Sent!</h1><p>Rahul has received your request.</p><div className="confirm-card"><b>🚘 Wakad → Hinjewadi</b><span>8:45 AM • Mon, 14 Oct</span><span>2 seats • Car • ₹50 / seat</span></div><Link className="primary wide" href="/my-rides">View Ride Details</Link></div><BottomNav active="rides"/></main>}
