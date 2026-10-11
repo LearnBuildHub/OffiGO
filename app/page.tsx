@@ -1,107 +1,194 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function OffiGoLandingPage() {
-
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function OffiGoDesktopHome() {
 
   return (
-<div className="min-h-screen bg-[#030B17] text-white font-sans relative overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+<div className="min-h-screen bg-[#040D1A] text-white font-sans relative overflow-x-hidden">
 
-      {/* Background Subtle Grid */}
-<div className="absolute inset-0 bg-[linear-gradient(to_right,#0f2744_1px,transparent_1px),linear-gradient(to_bottom,#0f2744_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-30 pointer-events-none" />
-<div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-600/15 blur-[140px] rounded-full pointer-events-none" />
+      {/* Background Gradient & Glow Effects */}
+<div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cyan-600/10 blur-[150px] rounded-full pointer-events-none" />
 
-      {/* NAVBAR */}
-<header className="relative z-50 max-w-7xl mx-auto px-5 h-20 flex items-center justify-between border-b border-cyan-900/20">
-<div className="flex items-center gap-2.5">
+      {/* TOP NAVBAR */}
+<header className="relative z-50 max-w-7xl mx-auto px-6 h-24 flex items-center justify-between border-b border-cyan-900/30">
+
+        {/* Logo & Brand */}
+<div className="flex items-center gap-3">
 <div className="relative w-11 h-11 flex items-center justify-center">
-<div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-xl rotate-45 opacity-80" />
-<div className="relative z-10 text-white font-black text-xl flex items-center justify-center">
-<svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+<div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-xl rotate-45" />
+<svg className="relative z-10 w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
 </svg>
 </div>
-</div>
-<div className="flex flex-col">
-<span className="text-2xl font-black tracking-tight text-white leading-none">
+<div>
+<span className="text-2xl font-black tracking-tight text-white flex items-center gap-1">
 
               Offi<span className="text-cyan-400">Go</span>
 </span>
-<span className="text-[8px] uppercase tracking-wider text-slate-400 font-semibold mt-0.5">
+<p className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold -mt-1">
 
               Your Daily Corporate Commute Network
-</span>
+</p>
 </div>
 </div>
-<div className="flex items-center gap-4">
-<button className="px-6 py-2 rounded-full border border-cyan-500/60 text-cyan-200 hover:text-white hover:bg-cyan-500/10 transition-all text-sm font-semibold tracking-wide">
+
+        {/* Navigation Links */}
+<nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+<a href="#" className="text-cyan-400 hover:text-cyan-300 transition-colors">Home</a>
+<a href="#" className="hover:text-cyan-300 transition-colors">How It Works</a>
+<a href="#" className="hover:text-cyan-300 transition-colors">Safety</a>
+<a href="#" className="hover:text-cyan-300 transition-colors">Corporate</a>
+<a href="#" className="hover:text-cyan-300 transition-colors">FAQ</a>
+<a href="#" className="hover:text-cyan-300 transition-colors">Contact</a>
+</nav>
+
+        {/* Login Button */}
+<div>
+<a href="/login" className="px-7 py-2.5 rounded-full border border-cyan-500/60 hover:border-cyan-400 text-cyan-200 hover:text-white hover:bg-cyan-500/10 transition-all text-sm font-semibold tracking-wide">
 
             Login
-</button>
-<button onClick={() => setMenuOpen(!menuOpen)} className="p-1.5 text-slate-300 hover:text-white rounded-lg">
-<svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-</svg>
-</button>
+</a>
 </div>
 </header>
 
       {/* HERO SECTION */}
-<main className="relative z-10 max-w-xl mx-auto px-5 text-center pt-8 pb-12">
-<p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-400 mb-4">
+<main className="relative z-10 max-w-7xl mx-auto px-6 pt-12 pb-16">
+<div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-          YOUR DAILY CORPORATE COMMUTE NETWORK
-</p>
-<h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-[1.1] text-white mb-5">
+          {/* Left Column: Headings & CTA */}
+<div className="lg:col-span-5 space-y-6">
+<h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1] text-white">
 
-          Same Office. <br />
+              Same Office. <br />
 
-          Same Route. <br />
-<span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-cyan-400 bg-clip-text text-transparent italic font-extrabold">
+              Same Route. <br />
+<span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent italic font-extrabold">
 
-            Better Together.
+                Better Together.
 </span>
 </h1>
-<p className="text-sm sm:text-base text-slate-300/90 leading-relaxed max-w-lg mx-auto font-normal mb-8">
+<p className="text-slate-300 text-base leading-relaxed max-w-md">
 
-          Join verified professionals, share or book rides, and make your daily commute easier, safer and more affordable.
+              Join verified professionals, share or book rides, and make your daily commute easier, safer and more affordable.
 </p>
 
-        {/* CTAs */}
-<div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto mb-6">
-<button className="w-full sm:w-1/2 py-3.5 px-5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-2">
+            {/* Action Buttons */}
+<div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+<button className="w-full sm:w-auto py-3.5 px-8 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-sm shadow-xl shadow-cyan-500/25 transition-all flex items-center justify-center gap-2">
 
-            Book a Ride
+                Book a Ride
 </button>
-<button className="w-full sm:w-1/2 py-3.5 px-5 rounded-full bg-[#08172c]/80 border border-cyan-500/50 text-cyan-200 hover:bg-cyan-950/40 font-bold text-sm transition-all flex items-center justify-center gap-2">
+<button className="w-full sm:w-auto py-3.5 px-8 rounded-full bg-[#081a33]/90 border border-cyan-500/50 text-cyan-200 hover:bg-cyan-950/40 font-bold text-sm transition-all flex items-center justify-center gap-2">
 
-            Share a Ride
+                Share a Ride
 </button>
 </div>
-<div className="inline-flex items-center gap-2 text-xs font-medium text-cyan-300 hover:text-cyan-200 cursor-pointer transition-colors mb-8">
-
-          Add OffiGo to Home Screen
 </div>
 
-        {/* Controlled Image Box Size */}
-<div className="relative max-w-md mx-auto rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#061427] shadow-2xl p-2">
+          {/* Right Column: Hero Graphic Banner with Right-side Tagline */}
+<div className="lg:col-span-7 relative">
+
+            {/* Floating Right Tagline */}
+<div className="absolute -top-10 right-6 z-20 text-right hidden sm:block">
+<p className="text-cyan-300 italic font-serif text-xl sm:text-2xl drop-shadow-md">
+
+                Same People.<br />
+
+                Same Dreams.<br />
+
+                Same Destination.
+</p>
+</div>
+
+            {/* Banner Image Container */}
+<div className="relative rounded-3xl overflow-hidden border border-cyan-500/30 bg-[#061428] shadow-2xl p-2">
 <img 
 
-            src="/images/offigo-hero.png" 
+                src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=1200&q=80" 
 
-            alt="OffiGo Corporate Commute Illustration"
+                alt="OffiGo Corporate Commute Illustration"
 
-            className="w-full h-auto object-contain rounded-xl max-h-[320px]"
+                className="w-full h-[360px] sm:h-[420px] object-cover rounded-2xl"
 
-            onError={(e) => {
+              />
+</div>
+</div>
+</div>
 
-              e.currentTarget.src = "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=600&q=80";
+        {/* BOTTOM FEATURE CARDS (How OffiGo Works + Trust Badges) */}
+<div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-            }}
+          {/* Left Box: How OffiGo Works */}
+<div className="lg:col-span-7 bg-[#071528]/90 border border-cyan-900/40 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl">
+<h3 className="text-xl font-bold text-white mb-6">How OffiGo Works</h3>
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-          />
+              {/* Step 1 */}
+<div className="space-y-2">
+<div className="w-10 h-10 rounded-full bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold">
+
+                  1
+</div>
+<h4 className="text-sm font-bold text-white">Choose your route</h4>
+<p className="text-xs text-slate-400 leading-relaxed">
+
+                  Enter your office location and preferred time.
+</p>
+</div>
+
+              {/* Step 2 */}
+<div className="space-y-2">
+<div className="w-10 h-10 rounded-full bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold">
+
+                  2
+</div>
+<h4 className="text-sm font-bold text-white">Find a matching commute</h4>
+<p className="text-xs text-slate-400 leading-relaxed">
+
+                  View available rides from verified professionals.
+</p>
+</div>
+
+              {/* Step 3 */}
+<div className="space-y-2">
+<div className="w-10 h-10 rounded-full bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold">
+
+                  3
+</div>
+<h4 className="text-sm font-bold text-white">Connect & ride</h4>
+<p className="text-xs text-slate-400 leading-relaxed">
+
+                  Book or share a ride and travel together.
+</p>
+</div>
+</div>
+</div>
+
+          {/* Right Box: Trust Badges */}
+<div className="lg:col-span-5 bg-[#071528]/90 border border-cyan-900/40 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl flex items-center justify-around">
+<div className="text-center space-y-2">
+<div className="w-12 h-12 mx-auto rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+
+                🛡️
+</div>
+<p className="text-xs font-bold text-white">Corporate Verified</p>
+</div>
+<div className="text-center space-y-2">
+<div className="w-12 h-12 mx-auto rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+
+                🚗
+</div>
+<p className="text-xs font-bold text-white">Car & Bike Options</p>
+</div>
+<div className="text-center space-y-2">
+<div className="w-12 h-12 mx-auto rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+
+                🔒
+</div>
+<p className="text-xs font-bold text-white">Safe & Reliable</p>
+</div>
+</div>
 </div>
 </main>
 </div>
