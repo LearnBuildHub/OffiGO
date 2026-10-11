@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Header(){return <header className="header"><Link href="/" className="brand"><img src="/offigo-logo.png"/><span>Offi<span>Go</span></span></Link><nav><a href="/#how">How It Works</a><a href="/#safety">Safety</a><a href="/#corporate">Corporate</a><a href="/#faq">FAQ</a><a href="/#contact">Contact</a></nav><Link href="/login" className="login-btn">Login</Link></header>}
