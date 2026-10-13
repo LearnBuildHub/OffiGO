@@ -16,14 +16,13 @@ export default function Home() {
 <section className="relative min-h-[90vh] lg:min-h-screen w-full flex flex-col justify-between overflow-hidden pt-20 pb-12 px-4 sm:px-8 lg:px-16">
 
         {/* Full Background Image Overlay */}
-<div 
-
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-
-          style={{ backgroundImage: `url('/hero-art.jpg')` }}
->
-
-          {/* Dark Gradient Overlay for perfect text visibility */}
+<div className="absolute inset-0 z-0 overflow-hidden">
+<img
+   src="/hero-art.jpg"
+   alt="OffiGo Hero Background"
+   className="w-full h-full object-cover object-center"
+ />
+ {/* Dark Gradient Overlay for text readability */}
 <div className="absolute inset-0 bg-gradient-to-r from-[#070d19]/95 via-[#070d19]/80 to-[#070d19]/30 lg:to-transparent" />
 <div className="absolute inset-0 bg-gradient-to-b from-[#070d19]/60 via-transparent to-[#070d19]" />
 </div>
