@@ -20,7 +20,7 @@ export default function Home() {
 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
 
-          style={{ backgroundImage: `url('/hero-art.png')` }}
+          style={{ backgroundImage: `url('/hero-art.jpg')` }}
 >
 
           {/* Dark Gradient Overlay for perfect text visibility */}
